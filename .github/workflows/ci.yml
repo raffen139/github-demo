@@ -1,0 +1,21 @@
+name: CI
+on:
+  pull_request:
+    branches: [ main ]
+  push:
+    branches: [ main ]
+jobs:
+  test:
+    name: Проверка кода (тесты)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Получение кода
+        uses: actions/checkout@v4
+      - name: Установка Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Запуск тестов
+        run: python -m unittest -v
+      - name: Итог проверки
+        run: echo "Все проверки пройдены, доступ открыт - код можно сливать в main"
